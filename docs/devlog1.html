@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Chapter 1 - Documentation</title>
+        <title>Devlog #1 - Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="chapter_1.html" class="active"><strong aria-hidden="true">1.</strong> Chapter 1</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="devlog1.html" class="active">Devlog #1</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -173,7 +173,88 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
+                        <p>dev log #1</p>
+<p>writing of this document began @~D20240312T0100Z</p>
+<p>what you'll need:</p>
+<ul>
+<li>old laptop</li>
+<li>internet connection</li>
+<li>debian 12.5.0 (stable)</li>
+<li>google account</li>
+<li>tailscale</li>
+<li>vscode</li>
+<li>nano</li>
+<li>ssh</li>
+<li>bash</li>
+<li>python</li>
+<li>git</li>
+<li>github</li>
+<li>docker</li>
+<li>portainer</li>
+<li>pgadmin</li>
+<li>postgres</li>
+<li>sql</li>
+<li>bootstrap</li>
+<li>mdbook</li>
+</ul>
+<ol start="0">
+<li>
+<p>this guide is going to assume that you're working from a workstation that is <strong><strong>not</strong></strong> the old laptop being used as a server. this guide will be written from the perspective of a person with both machines locally available, but primarily operating from a "main" computer with the server being accessed remotely/over the network</p>
+</li>
+<li>
+<p>you'll need to get the old laptop connected to the internet and running debian os (we were using 12.5.0 at the time of writing). this may include downloading the netinst .iso file, balena etcher/rufus, and going through the initial installation. furthermore, this guide assumes you have the prerequisite knowledge to do this on your own.</p>
+</li>
+<li>
+<p>before you start, you'll <em>probably</em> want make sure you have a google and github account, and if you don't then make them (github at least, which you'll need an email for... such as gmail). for all intents and purposes, most people will already fulfill this requirement, and your "normal" accounts should work just fine.</p>
+</li>
+<li>
+<p>use either your google or github account to signup for tailscale via oauth</p>
+</li>
+<li>
+<p>on the computer you'll be using, make sure you have a serviceable text editor (at least). we use a combination of nano and vscode for pretty much everything.</p>
+</li>
+<li>
+<p>sign up for tailscale. log in and setup both machines you'll be using. feel free to share the connection with a friend so they can also access your net. ssh from your "main" computer to your "server" computer when you're ready.</p>
+</li>
+<li>
+<p>install git, configure git. this guide assumes you know how to do this. else, visit: <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</a></p>
+</li>
+<li>
+<p>install gh (cli tool). authenticate and login. <code>gh auth login -w</code> should take care of this. if you have trouble, read the docs.</p>
+</li>
+<li>
+<p>clone the repository that corresponds to this guide. the repository of code and stuff that is used should be located at https://github.com/hurschill/ledger but it may have moved or something. check the "hurschill" organization if you're unable to clone the repository using the ledger project url listed.</p>
+</li>
+<li>
+<p>now might be a good time to make sure you have bash and python + pip package manager available for use. if you do, create a virtual environment <code>python3 -m venv .venv</code> and activate it to install packages with <code>pip install -r requirements.txt</code> (<code>deactivate</code> to exit the virtual environment)</p>
+</li>
+<li>
+<p>install docker and make sure it works by <em><strong>reading the docs</strong></em> (always read the docs) <a href="https://docs.docker.com/engine/install/debian">https://docs.docker.com/engine/install/debian</a></p>
+</li>
+</ol>
+<blockquote>
+<p>at this point, it's basically all work inside containers from here on out. we haven't actually worked through this project to develop a production deployment solution yet.ultimately, you're going to need portainer, pgadmin, and postgres.</p>
+</blockquote>
+<ol start="11">
+<li>create some directories to put your docker stuff in. for example, if you cloned the project repository to <code>~/some_dir</code> then you could do <code>mkdir ~/some_dir/docker</code> and create the following:</li>
+</ol>
+<ul>
+<li><code>~/some_dir/docker/portainer</code></li>
+<li><code>~/some_dir/docker/pgadmin</code></li>
+<li><code>~/some_dir/docker/postgres</code></li>
+</ul>
+<ol start="12">
+<li>
+<p>each container directory from step 11 will get its own docker-compose.yml followed by a <code>docker compose</code> command. we're working on making scripts to hold your hand while doing this part. don't forget to keep track of your username and password combinations used for your container things.</p>
+</li>
+<li>
+<p>after getting portainer, pgadmin, and postgres up/working then a schema needs to be made plus a whole bunch of sql script will be run to create a basic database.</p>
+</li>
+</ol>
+<blockquote>
+<p>at some point, creating an mdbook website may be advisable to keep track of how your app is created/deployed/etc. so you don't forget silly stuff along the way because "it wasn't that hard"</p>
+</blockquote>
+<p>note from the devlog author: i got bored and stopped here to go watch a youtube video</p>
 
                     </main>
 
