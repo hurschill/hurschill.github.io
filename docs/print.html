@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="devlog1.html">Devlog #1</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="devlog1.html">Devlog #1</a></li><li class="chapter-item expanded affix "><a href="devlog2.html">Devlog #2</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -259,6 +259,24 @@
 <p>at some point, creating an mdbook website may be advisable to keep track of how your app is created/deployed/etc. so you don't forget silly stuff along the way because "it wasn't that hard"</p>
 </blockquote>
 <p>note from the devlog author: i got bored and stopped here to go watch a youtube video</p>
+<div style="break-before: page; page-break-before: always;"></div><p>dev log #2</p>
+<p>writing of this document began @~D20240318T0518Z</p>
+<p>this log is written from the perspective that you have an old laptop with a fresh install of debian</p>
+<p>if you haven't already setup the user account you're working from to be a passwordless sudoer, then you could do that now.
+it's quick, makes your life easy, and is <em>totally</em> a very smart idea with no impact to the security of your system.
+<code>echo "$username ALL=(ALL:ALL) NOPASSWD: ALL" &gt;&gt; /etc/sudoers.d/$username</code>
+<em>(replace $username with the username of the account to grant passwordless sudoer permission to)</em></p>
+<p>make sure you have <code>curl</code> installed for the next step
+<code>sudo apt install -y curl</code></p>
+<p>if you haven't already, sign up for tailscale using your google, github, or other oauth-enabled account.
+for more information on tailscale, visit: <code>https://tailscale.com/download/linux</code>
+-&gt; run: <code>curl -fsSL https://tailscale.com/install.sh | sh</code>
+-&gt; then: <code>sudo tailscale up</code>
+-&gt; follow the authenication link printed to the terminal
+-&gt; and login to your account
+<strong>tailscale should now be setup.</strong></p>
+<p>i didn't feel like writing anymore tonight because it felt like i'd end up getting lazy and missing some steps.
+to recap, at this point you should have an old laptop with debian stable installed, an account with passwordless sudoer permissions, curl installed, and tailscale installed+up &amp; running. other devices on your tailnet should be able to connect to this machine now.</p>
 
                     </main>
 
