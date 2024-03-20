@@ -1,6 +1,6 @@
 dev log #2
 
-writing of this document began @~D20240318T0518Z
+writing of this document began @~D20240319T0518Z
 
 this log is written from the perspective that you have an old laptop with a fresh install of debian
 
