@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Page not found - Documentation</title>
-        <base href="/">
+        <title>Devlog #3 - Documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -89,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="devlog1.html">Devlog #1</a></li><li class="chapter-item expanded affix "><a href="devlog2.html">Devlog #2</a></li><li class="chapter-item expanded affix "><a href="devlog3.html">Devlog #3</a></li><li class="chapter-item expanded affix "><a href="devlog4.html">Devlog #4</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="devlog1.html">Devlog #1</a></li><li class="chapter-item expanded affix "><a href="devlog2.html">Devlog #2</a></li><li class="chapter-item expanded affix "><a href="devlog3.html" class="active">Devlog #3</a></li><li class="chapter-item expanded affix "><a href="devlog4.html">Devlog #4</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -174,14 +173,26 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <p>dev log #3</p>
+<p>writing of this document began @~D20240319T1806H</p>
+<p>prereqs:
+this log is written from the perspective that you have an old laptop with a fresh install of debian as well as tailscale set up/connected and are working from a "remote" workstation (even if the two computers are right next to each other)</p>
+<p>ssh:
+for the beginning of this entry, one would be expected to log in and beging working from their remote workstation. with that said, this is easily accomplished by using <code>ssh</code> with the command being <code>ssh $username@$ipaddress</code> where <code>$username</code> and <code>$ipaddress</code> correspond to the information associated with the old laptop's system and tailnet connection.</p>
+<p>git:
+additionally, taking the time to do <code>sudo apt install -y git</code> plus a good old-fashioned <code>git config --global user.name "*"</code> and <code>git config --global user.email *@*.*</code> would be advisable on both systems. for remote git hosting to do its job effectively here, it'd be best to <em>at the least</em> have the project repository public <strong>OR</strong> if private, ensure both hosts have appropriate access. using the cli tool <code>gh</code> is also helpful, given that you're using github for remote git hosting. on debian, the command to install <code>gh</code> will be <code>sudo apt install -y gh</code> and for authentication, i would recommend <code>gh auth login</code> (and paste a token) or <code>gh auth login -w</code> to login via web.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="devlog2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
+                            <a rel="next prefetch" href="devlog4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -189,7 +200,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="devlog2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
+                    <a rel="next prefetch" href="devlog4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="devlog1.html">Devlog #1</a></li><li class="chapter-item expanded affix "><a href="devlog2.html">Devlog #2</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Welcome</a></li><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="devlog1.html">Devlog #1</a></li><li class="chapter-item expanded affix "><a href="devlog2.html">Devlog #2</a></li><li class="chapter-item expanded affix "><a href="devlog3.html">Devlog #3</a></li><li class="chapter-item expanded affix "><a href="devlog4.html">Devlog #4</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -260,7 +260,7 @@
 </blockquote>
 <p>note from the devlog author: i got bored and stopped here to go watch a youtube video</p>
 <div style="break-before: page; page-break-before: always;"></div><p>dev log #2</p>
-<p>writing of this document began @~D20240318T0518Z</p>
+<p>writing of this document began @~D20240319T0518Z</p>
 <p>this log is written from the perspective that you have an old laptop with a fresh install of debian</p>
 <p>if you haven't already setup the user account you're working from to be a passwordless sudoer, then you could do that now.
 it's quick, makes your life easy, and is <em>totally</em> a very smart idea with no impact to the security of your system.
@@ -277,6 +277,76 @@ for more information on tailscale, visit: <code>https://tailscale.com/download/l
 <strong>tailscale should now be setup.</strong></p>
 <p>i didn't feel like writing anymore tonight because it felt like i'd end up getting lazy and missing some steps.
 to recap, at this point you should have an old laptop with debian stable installed, an account with passwordless sudoer permissions, curl installed, and tailscale installed+up &amp; running. other devices on your tailnet should be able to connect to this machine now.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>dev log #3</p>
+<p>writing of this document began @~D20240319T1806H</p>
+<p>prereqs:
+this log is written from the perspective that you have an old laptop with a fresh install of debian as well as tailscale set up/connected and are working from a "remote" workstation (even if the two computers are right next to each other)</p>
+<p>ssh:
+for the beginning of this entry, one would be expected to log in and beging working from their remote workstation. with that said, this is easily accomplished by using <code>ssh</code> with the command being <code>ssh $username@$ipaddress</code> where <code>$username</code> and <code>$ipaddress</code> correspond to the information associated with the old laptop's system and tailnet connection.</p>
+<p>git:
+additionally, taking the time to do <code>sudo apt install -y git</code> plus a good old-fashioned <code>git config --global user.name "*"</code> and <code>git config --global user.email *@*.*</code> would be advisable on both systems. for remote git hosting to do its job effectively here, it'd be best to <em>at the least</em> have the project repository public <strong>OR</strong> if private, ensure both hosts have appropriate access. using the cli tool <code>gh</code> is also helpful, given that you're using github for remote git hosting. on debian, the command to install <code>gh</code> will be <code>sudo apt install -y gh</code> and for authentication, i would recommend <code>gh auth login</code> (and paste a token) or <code>gh auth login -w</code> to login via web.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>dev log #4</p>
+<p>writing of this document began @~D20240324T1847H</p>
+<p>alright. first, we recap the progress thus far:
+old laptop, debian, passwordless sudoer, ssh, curl, git, tailscale, and a workstation to access it from.</p>
+<p>we should probably get the docker engine installed. it's going to be important for many of the steps to follow.</p>
+<p>docker docs can be found here: <a href="https://docs.docker.com/engine/install/debian">https://docs.docker.com/engine/install/debian</a></p>
+<p>if you find documentation scary and just want to cheat, the steps are as follows:
+(i'll add these in script form later...) (it's later now, and i just slammed all these snippets into a single bash file and full sent it. seems to work fine, lol. at time of writing, script name is <code>*/ledger/setup/docker/install-docker-engine.bash</code> -- this may change)</p>
+<ol>
+<li>uninstall conflicting packages <code>for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done</code></li>
+<li>setup apt repo</li>
+</ol>
+<pre><code class="language-bash"># Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release &amp;&amp; echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+sudo apt-get update
+</code></pre>
+<ol start="3">
+<li>install docker packages <code>sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</code></li>
+<li>function check your install <code>sudo docker run hello-world</code></li>
+<li>check your terminal for the message</li>
+</ol>
+<pre><code>Hello from Docker!
+This message shows that your installation appears to be working correctly.
+</code></pre>
+<p>if you got the above message as output, you should be fine to continue. all signs point to docker now being setup and installed on the old laptop.</p>
+<p>create a docker volume named <code>portainer_data</code> by running</p>
+<pre><code class="language-bash">docker volume create portainer_data
+</code></pre>
+<blockquote>
+<p>may require root/sudo permissions to run</p>
+</blockquote>
+<p>docker volumes are typically created within docker's volume mgmt sys but the exact location depends on your docker config. by default, docker manages volumes within its own directory structure, usually located in <code>/var/lib/docker/volumes/</code> (on linux systems)</p>
+<p>run <code>docker volume inspect</code> to provide information about the volume such as mount point (which indicates where the volume is stored on the system)</p>
+<p>to continue, the next step after creating <code>portainer_data</code> will be to create a <code>docker-compose.yml</code> file (<code>~/ledger/setup/docker/portainer/docker-compose.yml</code>) with the following contents:</p>
+<pre><code class="language-yml">version: "3.7"
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /docker/portainer/portainer_data:/data
+</code></pre>
+<p>then, from the <code>~/ledger/setup/docker/portainer/</code> directory, run <code>sudo docker compose up -d</code></p>
+<blockquote>
+<p>the <code>*/docker/portainer/docker-compose.yml</code> can be created anywhere on the system, but in this case will be included in the <code>ledger</code> project repository.</p>
+</blockquote>
+<p>after running the above command, <code>portainer</code> should now be up and reachable on your tailnet at {ip_address}:{port} and the default port number is 9000 at the time of writing</p>
 
                     </main>
 
